@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Draggable - Default functionality</title>
+  <link rel="stylesheet" href="ui.css">
+   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <style>
+  #draggable { width: 150px; height: 150px; padding: 0.5em; }
+  .ui-draggable {
+    border: 1px solid black;
+    text-align: center;
+    margin-top: 8px;
+    border-radius: 12px;
+    color: brown;
+    /* border: 1px saddlebrown; */
+}
+  </style>
+  <script src="jquery-1.12.4.js"></script>
+  <script src="jquery-ui.js"></script>
+    <script src="bootstrap.min.js"></script>
+  <script>
+  
+   function showVal(sent)
+ {
+ $("#port").val(sent)
+ }
+
+ 
+
+
+  $( function() {
+  
+function sendIt(action){
+
+//url=$("#formGroupInputLarge").val()+":"+$("#sub").val()+"/"+$("#port").val();
+url=$("#formGroupInputLarge").val()+"/"+$("#port").val();
+//http://192.168.43.38
+
+window.open(url)
+console.log("url-------->",url)
+ $.ajax({
+  url: url,
+   method:"GET",
+   port:80
+}).done(function() {
+  alert("Successfully switched "+action)
+}); 
+
+}
+
+
+$(".action button").on('click',function(){
+ 
+
+sendIt($(this).text())
+
+})
+   
+  var Button='<button type="button" class="btn btn-success">new button</button>';
+    var slider='<input type="range" class="ranger" min="0" max="100" oninput="showVal(this.value)" onchange="showVal(this.value)">';
+  
+    $( ".drags div" ).draggable({
+	  revert: true
+	
+	
+	})	;
+	
+	
+	$( ".dropper" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+          .append( eval($(ui.draggable).text()) );
+		  
+		//  if($(ui.draggable).text())
+           
+          
+      }
+    });
+	
+	
+	 
+  } );
+  
+  
+  
+  </script>
+</head>
+<body>
+ 
+<div   class="drags ui-widget-content">
+   
+</div>
+ 
+ 
+ <div class="container">
+ 
+  <h2>Control Panel </h2>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Drag Drop  Panel </div>
+    <div class="panel-body"> <div class="row">
+  <div class="col-md-2 drags">
+   
+   <div> slider</div>
+    <div> Button</div>
+  
+  
+  </div>
+ 
+  <div class="col-md-6">  <form class="form-horizontal">
+  <div class="form-group form-group-lg">
+    <label class="col-sm-4 control-label" for="formGroupInputLarge">Enter Ip  Address</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="text" id="formGroupInputLarge" placeholder="Ip  Address">
+    </div>
+	<div class="col-sm-2">
+      <input class="form-control" type="text" id="sub" placeholder="port">
+    </div>
+	<div class="col-sm-2">
+      <input class="form-control" type="text" id="port" placeholder="">
+    </div>
+  </div>
+   <div class="col-sm-6">
+       
+    </div>
+  <div class="form-group form-group-sm action">
+   <button type="button" class="btn btn-primary">on</button>
+      <button type="button" class="btn btn-primary">Off</button>
+  </div>
+  
+   <div class="form-group form-group-sm dropper">Drop here 
+    
+  </div>
+
+
+<!-- Indicates a successful or positive action -->
+
+</form></div>
+  
+  
+  </div></div>
+  </div>
+
+
+</div>
+ 
+</body>
+</html>
